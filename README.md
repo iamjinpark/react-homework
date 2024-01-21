@@ -131,6 +131,10 @@ export function FindAccountText() {
 
 ```
 
+##### 각 컴포넌트 App.js에 합치기
+
+<img src="https://github.com/iamjinpark/react-homework/assets/146078235/43ea5522-7ce7-4ecb-a32e-46e603ae23be">
+
 ---
 
 #### 최종 렌더링 구현
