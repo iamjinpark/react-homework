@@ -1,6 +1,7 @@
 ## React Weekly Mission
 
-## 1주차 과제
+<details> 
+  <summary><b>1주차 과제 리드미</b></summary>
 
 ### [ 프로젝트 페이지 리액트로 재구현 ]
 
