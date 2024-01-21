@@ -16,19 +16,24 @@ JSX 또는 React API를 사용해, Vanilla 프로젝트에서 구현한 인터�
 vite와 tailwind를 동시 사용할 수 있게 구성
 (참고 : https://tailwindcss.com/docs/guides/vite)
 
+---
+
 #### 컴포넌트 분리
 
 <img src="https://github.com/iamjinpark/react-homework/assets/146078235/1ba8a86a-491b-4169-aa21-5bf553c68e93">
- 1) 뒤로가기 버튼 = GoBackButton.jsx<br />
- 2) 로그인 안내 문구 = LoginText.jsx<br />
- 3) 로그인 입력창 = LoginInput.jsx<br />
- 4) 이메일로 계정찾기 = FindAccountText.jsx<br />
+
+1.  뒤로가기 버튼 = GoBackButton.jsx<br />
+2.  로그인 안내 문구 = LoginText.jsx<br />
+3.  로그인 입력창 = LoginInput.jsx<br />
+4.  이메일로 계정찾기 = FindAccountText.jsx<br />
 
 총 4파트로 구분했으며 각 컴포넌트별로 파일 생성
 
 <p align="center">
 <img src="https://github.com/iamjinpark/react-homework/assets/146078235/d84b24c7-e69b-4b09-9d25-59ef68bb28e0" width="200px" >
 </p>
+
+---
 
 #### 각 컴포넌트별 코드 구성
 
@@ -126,9 +131,13 @@ export function FindAccountText() {
 
 ```
 
+---
+
 #### 최종 렌더링 구현
 
 <img src="https://github.com/iamjinpark/react-homework/assets/146078235/1aff3e47-1543-47ae-96cf-d13408d85c6e">
+
+---
 
 #### 느낀점
 
