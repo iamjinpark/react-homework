@@ -1,0 +1,62 @@
+[
+    {
+        "id": "frontEnd",
+        "type": "프로그래밍",
+        "name": "프론트엔드"
+    },
+    {
+        "id": "backEnd",
+        "type": "프로그래밍",
+        "name": "백엔드"
+    },
+    {
+        "id": "react",
+        "type": "프로그래밍",
+        "name": "리엑트"
+    },
+    {
+        "id": "fullStack",
+        "type": "프로그래밍",
+        "name": "풀스택"
+    },
+    {
+        "id": "algorithm",
+        "type": "프로그래밍",
+        "name": "알고리즘"
+    },
+    {
+        "id": "basicKnowledge",
+        "type": "프로그래밍",
+        "name": "기초지식"
+    },
+    {
+        "id": "uiDesign",
+        "type": "디자인",
+        "name": "UI디자인"
+    },
+    {
+        "id": "uxDesign",
+        "type": "디자인",
+        "name": "UX디자인"
+    },
+    {
+        "id": "uxUiDesign",
+        "type": "디자인",
+        "name": "UX/UI"
+    },
+    {
+        "id": "dataAnalysis",
+        "type": "데이터",
+        "name": "데이터분석"
+    },
+    {
+        "id": "statisticalAnalysis",
+        "type": "데이터",
+        "name": "통계분석"
+    },
+    {
+        "id": "visualization",
+        "type": "데이터",
+        "name": "시각화"
+    }
+]

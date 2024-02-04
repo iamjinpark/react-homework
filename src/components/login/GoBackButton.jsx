@@ -1,5 +1,5 @@
 import React from "react";
-import direction from "../../public/images/directionL.svg";
+import direction from "../../../public/images/directionL.svg";
 
 export function GoBackButton() {
   return (
