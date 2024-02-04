@@ -150,3 +150,127 @@ export function FindAccountText() {
 아직은 렌더링만 할 수 있는 실력이지만 추후 이벤트 함수 적용을 배워 유효성 검사 파트까지 구현하고 싶다.
 
 </details>
+
+<details> 
+  <summary><b>3주차 과제 리드미</b></summary>
+
+### [프로젝트 페이지 리액트로 구현 + 기능 추가]
+
+#### 목표
+
+- [x] 바닐라 프로젝트의 데이터베이스 연동 부분을 리액트로 구현합니다.
+- [x] 리액트 방식으로 앱의 상태 및 사이드 이펙트를 관리해봅니다.
+- [ ] 커스텀 훅 함수를 1개 이상 작성해 여러 곳에서 재사용 해봅니다.
+- [ ] 가능한 경우, DOM 객체에 접근/조작하는 부분도 구현합니다. (옵션)
+- [ ] 가능한 경우, Storybook을 활용해보세요. (옵션)
+
+#### 구현 기능
+
+<p align="center">
+<img src="https://github.com/iamjinpark/react-homework/assets/146078235/fea0bf73-2a3a-473b-8a74-a46bb3d795ce">
+</p>
+
+카테고리 페이지에 서치 기능을 추가했다.
+바닐라 프로젝트때 구현해보고 싶었던 기능이였는데 화면에 바로 렌더링 되는 방법을 몰라 아예 input 태그를 지우고 제출했었는데 리액트 덕분에 손쉽게 구현할 수 있었다. <br/>(하지만 절대 과정이 손쉽지는 않았다.)
+
+#### category.json 파일 생성
+
+바닐라 프로젝트때 하드코딩으로 직접 type, name, id 값을 각 아이템마다 직접 다 쳤다면,
+리액트에서는 컴포넌트 생성 후 데이터.json 에서 불러와 리스트 렌더링을 사용하면 된다.
+
+<p align="center">
+<img src="https://github.com/iamjinpark/react-homework/assets/146078235/462c5e52-d73f-4c10-92c5-2b1a6515283f">
+</p>
+
+#### 컴포넌트 구성
+
+[이전]<br/>
+각 SearchInput, CategoryItem, CategoryButton로 구분한 뒤 SearchForm 내부에 추가하는 방식으로 구현
+그러나 SearchInput 컴포넌트 내에 onChange 함수를 적용할 수 없었고 (상태 관리 연동이 안됨), CategoryItem에 filter 기능을 연동할 수 없는 문제점 발생
+<br/>
+[이후]<br/>
+SearchForm 태그 내부에 컴포넌트가 아닌 JSX 구문으로 추가한 뒤 각 속성들을 추가해줌
+
+1. SearchInput 컴포넌트 대신에 아래 코드와 같이 추가
+
+```
+<input
+            id="search"
+            type="search"
+            placeholder="분야 (이름)로 검색 (ex.프론트)"
+            className="category-search-input w-full h-[1.125rem] placeholder:text-base appearance-none outline-none"
+            defaultValue={searchText}
+            onChange={debounce(handleSearch)}
+          />
+```
+
+2. CategoryItem에 map을 사용해서 직접 속성값 (item.\*) 추가
+
+```
+ {filteredNameSecond.map((item) => (
+          <div className="w-[49%] mt-3" key={item.id}>
+            <label
+              htmlFor={item.id}
+              className="category-label w-full flex justify-between items-center bg-gray-300 p-[0.75rem] rounded-2xl"
+            >
+              <div className="flex flex-col">
+                <p className=" text-[0.6875rem] leading-4 font-semibold text-gray-100">
+                  {item.type}
+                </p>
+                <p className="text-lg leading-7 font-semibold text-nowrap">
+                  {item.name}
+                </p>
+              </div>
+              <input
+                value={item.name}
+                type="checkbox"
+                id={item.id}
+                className="category-checkbox appearance-none w-[1.25rem] h-[1.25rem] bg-categoryPlus bg-no-repeat bg-right checked:bg-categoryCheck"
+              />
+            </label>
+          </div>
+        ))}
+```
+
+#### 디바운스 함수 추가
+
+##### 야무쌤과 만든 유틸함수 사용
+
+input onChange 속성에 연결해주었다.
+
+```
+export default function debounce(callback, timeout = 400 /* 0.4s */) {
+  let cleanup;
+
+  // closure
+  return (...args) => {
+    clearTimeout(cleanup);
+    cleanup = setTimeout(callback.bind(null, ...args), timeout);
+  };
+}
+```
+
+#### 상태관리
+
+<p align="center">
+<img src="https://github.com/iamjinpark/react-homework/assets/146078235/05ac795f-945d-4af2-97f4-f178ccbc7df3">
+</p>
+
+searchInput에 값을 입력하면 리액트 상태 관리로 인해 state에 값이 들어오는 것을 확인할 수 있다.
+
+#### input 에 입력값이 화면에 바로 렌더링 될 수 있는 이유?
+
+첫 렌더링 자체를 filter 메서드를 이용해 리스트 렌더링 해주고 입력값(즉, searchText)를 포함하고 있는 아이템 객체만 추후 렌더링하여 화면에 보여지는 구조로 코드를 짰다.
+
+```
+  const filteredNameSecond = category.filter((item) =>
+    item.name.includes(searchText)
+  );
+```
+
+#### 회고
+
+useState에 대해서 개념을 잘 익혔다고 생각했는데 막상 코드로 상태 관리를 하려니 생각만큼 쉽지 않았다.
+각 컴포넌트별로 어떤 값을 상태 관리 할 것인지, 어디에 이벤트를 줄 것인지 로직을 잘 생각해야했고 야무쌤과 수업에서 다룬 내용을 직접 응용하려니 쉽지 않았다. 단순히 텍스트를 리스트 렌더링했던 실습 예제와는 다르게 컴포넌트를 생성하고 적용하려니 컴포넌트 내부에 입력되야할 값들이 매칭되지 않거나, 화면에 렌더링이 되지 않거나 아주 다양한 문제점을 마주할 수 있었다. 그래도 바닐라 프로젝트 조원들의 도움과 야무쌤 코드를 찬찬히 훑어보며 최종적으로 원하는 기능을 구현할 수 있었다.
+
+</details>
